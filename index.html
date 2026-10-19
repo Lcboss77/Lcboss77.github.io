@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lcboss77 FiveM Portfolio</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky resource index on the left like a file tree, one long column of project sheets on the right.
+   Each sheet = resource name, what it does, one big screen with a thumbnail strip. */
+:root {
+  --ink: #0b0e15;
+  --panel: #131825;
+  --line: #232b3c;
+  --fg: #e7ebf3;
+  --mute: #8b95a9;
+  --signal: #ff8a3d;
+  --cyan: #52d3ea;
+  --font-display: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--ink);
+  color: var(--fg);
+  font: 400 16px/1.6 var(--font-body);
+  margin: 0;
+  padding-block: 0 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+
+.shell { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 56px; }
+main { min-width: 0; }
+@media (min-width: 1000px) { .shell { grid-template-columns: 210px minmax(0, 1fr); } }
+
+/* index rail */
+.rail { display: none; }
+@media (min-width: 1000px) {
+  .rail { display: block; position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; padding-top: 56px; }
+}
+.rail .mark { font: 600 13px/1 var(--font-mono); color: var(--signal); letter-spacing: .08em; text-transform: uppercase; margin: 0 0 18px; }
+.rail ul { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+.rail li a { display: block; padding: 7px 0 7px 16px; margin-left: -1px; border-left: 1px solid transparent; font: 400 13px/1.3 var(--font-mono); color: var(--mute); text-decoration: none; }
+.rail li a:hover, .rail li a.on { color: var(--fg); border-left-color: var(--signal); }
+
+/* header */
+.top { padding-top: 72px; padding-bottom: 48px; border-bottom: 1px solid var(--line); }
+.top .tag { font: 500 13px/1 var(--font-mono); color: var(--cyan); letter-spacing: .1em; text-transform: uppercase; margin: 0 0 20px; }
+h1 { font: 700 clamp(2.4rem, 6.4vw, 4.6rem)/1 var(--font-display); letter-spacing: -.01em; margin: 0 0 22px; text-wrap: balance; }
+h1 span { color: var(--signal); }
+.lede { font-size: 1.15rem; max-width: 60ch; color: var(--mute); margin: 0 0 32px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 0; padding: 0; list-style: none; font: 400 13px/1.4 var(--font-mono); color: var(--mute); }
+.facts b { color: var(--fg); font-weight: 500; }
+
+/* project sheet */
+.sheet { padding-block: 64px 8px; scroll-margin-top: 8px; }
+.sheet + .sheet { border-top: 1px solid var(--line); margin-top: 56px; }
+.res { font: 500 13px/1 var(--font-mono); color: var(--signal); margin: 0 0 12px; }
+h2 { font: 600 clamp(1.7rem, 3.6vw, 2.4rem)/1.1 var(--font-display); margin: 0 0 14px; text-wrap: balance; }
+.sheet > p { max-width: 64ch; margin: 0 0 18px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; padding: 0; list-style: none; }
+.chips li { font: 400 12px/1 var(--font-mono); color: var(--cyan); border: 1px solid var(--line); background: var(--panel); padding: 7px 10px; border-radius: 4px; }
+.feat { margin: 0 0 28px; padding: 0; list-style: none; display: grid; gap: 8px 32px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); max-width: 880px; }
+.feat li { position: relative; padding-left: 18px; color: var(--mute); font-size: .95rem; }
+.feat li::before { content: ""; position: absolute; left: 0; top: .72em; width: 8px; height: 1px; background: var(--signal); }
+.feat li b { color: var(--fg); font-weight: 500; }
+
+/* gallery */
+.stage { margin: 0; }
+.stage button { display: block; width: 100%; padding: 0; border: 1px solid var(--line); background: var(--panel); border-radius: 6px; overflow: hidden; cursor: zoom-in; }
+.stage img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.stage figcaption { font: 400 13px/1.4 var(--font-mono); color: var(--mute); padding-top: 10px; }
+.thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 10px; margin-top: 14px; }
+.thumbs button { padding: 0; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: var(--panel); cursor: pointer; opacity: .62; transition: opacity .15s, border-color .15s; }
+.thumbs button:hover { opacity: 1; }
+.thumbs button[aria-current="true"] { opacity: 1; border-color: var(--signal); }
+.thumbs img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+.foot { margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line); font: 400 13px/1.6 var(--font-mono); color: var(--mute); max-width: 70ch; }
+
+/* lightbox */
+.lb { position: fixed; inset: 0; background: rgba(5, 7, 11, .94); display: none; align-items: center; justify-content: center; flex-direction: column; gap: 12px; z-index: 10;
+      padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.lb.open { display: flex; }
+.lb img { max-width: 100%; max-height: calc(100% - 44px); border-radius: 6px; border: 1px solid var(--line); }
+.lb p { margin: 0; font: 400 13px/1.4 var(--font-mono); color: var(--mute); }
+.lb button { position: absolute; top: max(14px, env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px)); font: 500 13px/1 var(--font-mono); color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px; cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <nav class="rail" aria-label="Projects">
+    <p class="mark">Resources</p>
+    <ul>
+      <li><a href="#pets">lc-PetSystem</a></li>
+      <li><a href="#companion">lc-Companion</a></li>
+      <li><a href="#items">ItemManager</a></li>
+      <li><a href="#boost">lc_Targetboosting</a></li>
+      <li><a href="#shops">Weapon Shops</a></li>
+      <li><a href="#utils">Fingerprint Scanner</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <header class="top">
+      <p class="tag">FiveM resources / interfaces</p>
+      <h1>Lcboss77 <span>scripts</span> and the screens players actually see</h1>
+      <p class="lede">Server scripts in Lua with custom in-game interfaces built in HTML, CSS and JavaScript. Shops, admin tools, job systems and roleplay props for ESX and QBCore servers.</p>
+      <ul class="facts">
+        <li><b>30+</b> resources</li>
+        <li><b>Lua</b> client and server</li>
+        <li><b>NUI</b> HTML / CSS / JS</li>
+        <li><b>ESX</b> + QBCore</li>
+        <li><b>oxmysql</b> / SQL</li>
+        <li><b>Discord</b> bot (Node.js)</li>
+      </ul>
+    </header>
+
+    <!-- PET SYSTEM -->
+    <section class="sheet" id="pets">
+      <p class="res">lc-PetSystem</p>
+      <h2>Pet System</h2>
+      <p>An animal shop and pet care screen. Players browse breeds, fill a cart, then open a pet page that tracks six live needs and lists the commands the pet has learned.</p>
+      <ul class="chips"><li>Lua</li><li>NUI</li><li>ESX</li><li>SQL</li></ul>
+      <ul class="feat">
+        <li><b>Seven breeds</b> with prices, cart and running total</li>
+        <li><b>Six stat rings</b> for health, food, water, sun, activity and happiness</li>
+        <li><b>Learned commands</b> played as animations straight from the UI</li>
+        <li><b>Custom art</b> in the shop and info pages</li>
+      </ul>
+      <div class="gallery">
+        <figure class="stage"><button type="button" aria-label="Enlarge screenshot"><img src="img-pet-1-shop.jpg" alt="Pet shop with a list of dog breeds and add to cart buttons"></button><figcaption>Shop</figcaption></figure>
+        <div class="thumbs">
+          <button type="button" data-src="img-pet-1-shop.jpg" data-cap="Shop" data-alt="Pet shop with a list of dog breeds and add to cart buttons" aria-current="true"><img src="img-pet-1-shop.jpg" alt="Shop"></button>
+          <button type="button" data-src="img-pet-2-cart.jpg" data-cap="Cart with three pets and a total price" data-alt="Pet shop with a cart panel showing three pets and a total"><img src="img-pet-2-cart.jpg" alt="Cart"></button>
+          <button type="button" data-src="img-pet-3-info.jpg" data-cap="Pet info: commands, six stat rings, profile" data-alt="Pet information page with commands and six circular stat meters"><img src="img-pet-3-info.jpg" alt="Pet info"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPANION -->
+    <section class="sheet" id="companion">
+      <p class="res">lc-Companion</p>
+      <h2>NPC Companion</h2>
+      <p>A premium companion store paid for with donation coins. After purchase the player gets a command menu for the companion they now own.</p>
+      <ul class="chips"><li>Lua</li><li>NUI</li><li>Custom models (.ydd / .ymt)</li></ul>
+      <ul class="feat">
+        <li><b>Three companion types</b>: mercenary, robot and animal</li>
+        <li><b>Coin balance</b> and price sent live from the server</li>
+        <li><b>Five actions</b>: instant heal, change appearance, call NPC, invisible mode, rewards</li>
+      </ul>
+      <div class="gallery">
+        <figure class="stage"><button type="button" aria-label="Enlarge screenshot"><img src="img-companion-1-shop.jpg" alt="Companion store with mercenary, robot and animal cards"></button><figcaption>Store</figcaption></figure>
+        <div class="thumbs">
+          <button type="button" data-src="img-companion-1-shop.jpg" data-cap="Store" data-alt="Companion store with mercenary, robot and animal cards" aria-current="true"><img src="img-companion-1-shop.jpg" alt="Store"></button>
+          <button type="button" data-src="img-companion-2-menu.jpg" data-cap="Owned companion menu" data-alt="Companion menu with five action buttons"><img src="img-companion-2-menu.jpg" alt="Menu"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ITEM MANAGER -->
+    <section class="sheet" id="items">
+      <p class="res">ItemManager</p>
+      <h2>Item Manager</h2>
+      <p>An admin panel for the server's item database. Staff list, search, edit and delete items without touching SQL, and every change is written to a log.</p>
+      <ul class="chips"><li>Lua</li><li>NUI</li><li>ox_inventory</li><li>Discord API</li><li>SQL</li></ul>
+      <ul class="feat">
+        <li><b>Edit form built from the table</b>, so new database columns appear without code changes</li>
+        <li><b>10 interface languages</b> from English to Swedish</li>
+        <li><b>Stats</b> for total items and item types</li>
+        <li><b>Action log</b> with timestamps for every edit and delete</li>
+        <li><b>Settings</b> for command name, ACE permission, image upload and list export</li>
+        <li><b>Discord profile</b> of the signed-in staff member in the header</li>
+      </ul>
+      <div class="gallery">
+        <figure class="stage"><button type="button" aria-label="Enlarge screenshot"><img src="img-items-1-listing.jpg" alt="Item Manager grid of items with search bar"></button><figcaption>Listing</figcaption></figure>
+        <div class="thumbs">
+          <button type="button" data-src="img-items-1-listing.jpg" data-cap="Listing" data-alt="Item Manager grid of items with search bar" aria-current="true"><img src="img-items-1-listing.jpg" alt="Listing"></button>
+          <button type="button" data-src="img-items-2-menu.jpg" data-cap="Side menu: Stats, Listing, Logs, Settings" data-alt="Item Manager with the side menu open"><img src="img-items-2-menu.jpg" alt="Menu"></button>
+          <button type="button" data-src="img-items-6-edit.jpg" data-cap="Edit form generated from database columns" data-alt="Item edit form with name, label, weight, limit fields"><img src="img-items-6-edit.jpg" alt="Edit"></button>
+          <button type="button" data-src="img-items-3-settings.jpg" data-cap="Configuration page" data-alt="Configuration page with language, command and permission fields"><img src="img-items-3-settings.jpg" alt="Settings"></button>
+          <button type="button" data-src="img-items-4-stats.jpg" data-cap="Overall stats" data-alt="Overall stats with total items and item types"><img src="img-items-4-stats.jpg" alt="Stats"></button>
+          <button type="button" data-src="img-items-5-logs.jpg" data-cap="Timestamped action log" data-alt="Log of edit and delete actions with timestamps"><img src="img-items-5-logs.jpg" alt="Logs"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TARGET BOOSTING -->
+    <section class="sheet" id="boost">
+      <p class="res">lc_Targetboosting</p>
+      <h2>Death Contract Tablet</h2>
+      <p>A criminal-job tablet with rank progression, a contract history and a leaderboard. Accepting a job opens a paper contract that the player signs, and the signature is stamped in blood.</p>
+      <ul class="chips"><li>Lua</li><li>NUI</li><li>ESX</li></ul>
+      <ul class="feat">
+        <li><b>Four ranks</b> from Newbie to Elite Killer with progress bars</li>
+        <li><b>Contract paper</b> filled from data: target, location, payment, instructions, map images</li>
+        <li><b>Signature effect</b> with a red cross and splatter</li>
+      </ul>
+      <div class="gallery">
+        <figure class="stage"><button type="button" aria-label="Enlarge screenshot"><img src="img-boost-4-contract.jpg" alt="Tablet next to a Death Contract paper with a signed cross"></button><figcaption>Contract signed</figcaption></figure>
+        <div class="thumbs">
+          <button type="button" data-src="img-boost-4-contract.jpg" data-cap="Contract signed" data-alt="Tablet next to a Death Contract paper with a signed cross" aria-current="true"><img src="img-boost-4-contract.jpg" alt="Contract"></button>
+          <button type="button" data-src="img-boost-1-ladder.jpg" data-cap="Rank ladder" data-alt="Tablet showing four ranks with progress bars"><img src="img-boost-1-ladder.jpg" alt="Ranks"></button>
+          <button type="button" data-src="img-boost-2-history.jpg" data-cap="Contract history" data-alt="Tablet contract history table"><img src="img-boost-2-history.jpg" alt="History"></button>
+          <button type="button" data-src="img-boost-3-leaderboard.jpg" data-cap="Leaderboard" data-alt="Tablet leaderboard table"><img src="img-boost-3-leaderboard.jpg" alt="Leaderboard"></button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SHOPS -->
+    <section class="sheet" id="shops">
+      <p class="res">BlackMarket / PoliceWeb</p>
+      <h2>Weapon Shops</h2>
+      <p>Two full-screen shop interfaces built around a clear loop: browse, inspect, buy. Each reads its data from the server and reacts to the player's money.</p>
+      <ul class="chips"><li>Lua</li><li>NUI</li><li>ESX</li></ul>
+      <ul class="feat">
+        <li><b>Black Market</b> with weapon stats for damage, accuracy, fire rate and range</li>
+        <li><b>Police Web</b> shop showing pocket and bank money</li>
+      </ul>
+      <div class="gallery">
+        <figure class="stage"><button type="button" aria-label="Enlarge screenshot"><img src="img-blackmarket-1.jpg" alt="Black market weapon shop with stat bars and price"></button><figcaption>Black Market</figcaption></figure>
+        <div class="thumbs">
+          <button type="button" data-src="img-blackmarket-1.jpg" data-cap="Black Market" data-alt="Black market weapon shop with stat bars and price" aria-current="true"><img src="img-blackmarket-1.jpg" alt="Black Market"></button>
+          <button type="button" data-src="img-police-1.jpg" data-cap="Police Web shop" data-alt="Police weapon shop with a row of weapon cards"><img src="img-police-1.jpg" alt="Police Web"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- UTILITIES -->
+    <section class="sheet" id="utils">
+      <p class="res">lc-fingscann</p>
+      <h2>Fingerprint Scanner</h2>
+      <p>A handheld device for roleplay. It reads a fingerprint and returns the person's record.</p>
+      <ul class="chips"><li>Lua</li><li>NUI</li><li>ESX</li><li>oxmysql</li></ul>
+      <ul class="feat">
+        <li><b>Scanner</b> placed at map locations with a proximity marker and an interact prompt</li>
+        <li><b>Result card</b> with name, age, address, occupation and mugshot support</li>
+      </ul>
+      <div class="gallery">
+        <figure class="stage"><button type="button" aria-label="Enlarge screenshot"><img src="img-scanner-2-result.jpg" alt="Handheld fingerprint scanner with a result card"></button><figcaption>Scanner result</figcaption></figure>
+        <div class="thumbs">
+          <button type="button" data-src="img-scanner-2-result.jpg" data-cap="Scanner result" data-alt="Handheld fingerprint scanner with a result card" aria-current="true"><img src="img-scanner-2-result.jpg" alt="Scanner result"></button>
+          <button type="button" data-src="img-scanner-1-ready.jpg" data-cap="Scanner ready" data-alt="Handheld fingerprint scanner waiting for a finger"><img src="img-scanner-1-ready.jpg" alt="Scanner ready"></button>
+        </div>
+      </div>
+    </section>
+
+    <p class="foot">Screens are captured from the real interface code running with sample data (names, prices, stats) at 1920 x 1080. In game they sit over the world.</p>
+  </main>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+  <button type="button" id="lbx">Close</button>
+  <img id="lbi" alt="">
+  <p id="lbc"></p>
+</div>
+
+<script>
+(function () {
+  var lb = document.getElementById("lb"), lbi = document.getElementById("lbi"), lbc = document.getElementById("lbc");
+  function closeLb() { lb.classList.remove("open"); }
+  document.getElementById("lbx").addEventListener("click", closeLb);
+  lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeLb(); });
+
+  document.querySelectorAll(".gallery").forEach(function (g) {
+    var img = g.querySelector(".stage img"), cap = g.querySelector("figcaption");
+    g.querySelectorAll(".thumbs button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        img.src = b.dataset.src; img.alt = b.dataset.alt; cap.textContent = b.dataset.cap;
+        g.querySelectorAll(".thumbs button").forEach(function (x) { x.removeAttribute("aria-current"); });
+        b.setAttribute("aria-current", "true");
+      });
+    });
+    g.querySelector(".stage button").addEventListener("click", function () {
+      lbi.src = img.src; lbi.alt = img.alt; lbc.textContent = cap.textContent; lb.classList.add("open");
+    });
+  });
+
+  var links = document.querySelectorAll(".rail a"), secs = [];
+  links.forEach(function (a) { secs.push(document.querySelector(a.getAttribute("href"))); });
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (e) {
+        if (e.isIntersecting) { links.forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id); }); }
+      });
+    }, { rootMargin: "-20% 0px -70% 0px" });
+    secs.forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+
+</body>
+</html>
