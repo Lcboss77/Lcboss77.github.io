@@ -104,7 +104,10 @@ h2 { font: 600 clamp(1.7rem, 3.6vw, 2.4rem)/1.1 var(--font-display); margin: 0 0
       <li><a href="#companion">lc-Companion</a></li>
       <li><a href="#items">ItemManager</a></li>
       <li><a href="#boost">lc_Targetboosting</a></li>
-      <li><a href="#shops">Weapon Shops</a></li>
+      <li><a href="#diving">lc-specialItems</a></li>
+      <li><a href="#commands">lc-commlist</a></li>
+      <li><a href="#shooters">top_shooters</a></li>
+      <li><a href="#shops">Black Market</a></li>
       <li><a href="#utils">Fingerprint Scanner</a></li>
     </ul>
   </nav>
@@ -216,21 +219,79 @@ h2 { font: 600 clamp(1.7rem, 3.6vw, 2.4rem)/1.1 var(--font-display); margin: 0 0
     </section>
 
 
+    <!-- DIVING -->
+    <section class="sheet" id="diving">
+      <p class="res">lc-specialItems</p>
+      <h2>Diving Oxygen Bar</h2>
+      <p>A vertical oxygen meter for underwater play. The bar drains as the player's oxygen drops, changes colour as it gets dangerous, and bubbles drift up through it the whole time.</p>
+      <ul class="chips"><li>Lua</li><li>NUI</li><li>CSS animation</li></ul>
+      <ul class="feat">
+        <li><b>Colour by level</b>: green above 50%, yellow from 20 to 50, red below 20</li>
+        <li><b>Live bubbles</b> spawned at random sizes and positions, each one rising and fading</li>
+        <li><b>Smooth drain</b> with an eased height transition on every update</li>
+        <li><b>Out of Oxygen!</b> message when the level reaches zero</li>
+      </ul>
+      <div class="gallery">
+        <figure class="stage"><button type="button" aria-label="Enlarge screenshot"><img src="img-oxygen-drain.gif" alt="Oxygen bar draining from full to empty while bubbles rise"></button><figcaption>Draining from 100% to empty</figcaption></figure>
+        <div class="thumbs">
+          <button type="button" data-src="img-oxygen-drain.gif" data-cap="Draining from 100% to empty" data-alt="Oxygen bar draining from full to empty while bubbles rise" aria-current="true"><img src="img-oxygen-drain.gif" alt="Animation"></button>
+          <button type="button" data-src="img-oxygen-states.jpg" data-cap="Four stages: 100%, 62%, 26%, 7%" data-alt="Oxygen bar at four levels turning from green to yellow to red"><img src="img-oxygen-states.jpg" alt="Stages"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMANDS -->
+    <section class="sheet" id="commands">
+      <p class="res">lc-commlist</p>
+      <h2>Game Commands Panel</h2>
+      <p>An in-game help panel that lists every command and keybind the server offers. The server sends the lists and the panel builds itself from them, so a new command shows up without changing the interface.</p>
+      <ul class="chips"><li>Lua</li><li>NUI</li><li>SQL</li></ul>
+      <ul class="feat">
+        <li><b>Two tabs</b>: Commands with the slash command, Keybinds with the key</li>
+        <li><b>Empty states</b> that say when no commands or keybinds exist</li>
+        <li><b>Closes</b> with the X button or the Escape key</li>
+      </ul>
+      <div class="gallery">
+        <figure class="stage"><button type="button" aria-label="Enlarge screenshot"><img src="img-commlist-1-commands.jpg" alt="Game Commands panel listing commands with slash names"></button><figcaption>Commands tab</figcaption></figure>
+        <div class="thumbs">
+          <button type="button" data-src="img-commlist-1-commands.jpg" data-cap="Commands tab" data-alt="Game Commands panel listing commands with slash names" aria-current="true"><img src="img-commlist-1-commands.jpg" alt="Commands"></button>
+          <button type="button" data-src="img-commlist-2-keybinds.jpg" data-cap="Keybinds tab" data-alt="Game Commands panel listing keybinds with key badges"><img src="img-commlist-2-keybinds.jpg" alt="Keybinds"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOOTERS -->
+    <section class="sheet" id="shooters">
+      <p class="res">top_shooters</p>
+      <h2>Top Shooters Leaderboard</h2>
+      <p>A kill leaderboard that shows the ten best shooters on the server over a full-screen artwork background.</p>
+      <ul class="chips"><li>Lua</li><li>NUI</li><li>jQuery</li></ul>
+      <ul class="feat">
+        <li><b>Top 10 table</b> with rank, name and kills, rebuilt on every update</li>
+        <li><b>Podium styling</b> with a trophy and its own colour for first, second and third</li>
+        <li><b>Closes</b> with the Escape key and tells the game script</li>
+      </ul>
+      <div class="gallery">
+        <figure class="stage"><button type="button" aria-label="Enlarge screenshot"><img src="img-shooters-1.jpg" alt="Top Shooters leaderboard over artwork of a masked player with a rifle"></button><figcaption>Leaderboard</figcaption></figure>
+        <div class="thumbs">
+          <button type="button" data-src="img-shooters-1.jpg" data-cap="Leaderboard" data-alt="Top Shooters leaderboard over artwork of a masked player with a rifle" aria-current="true"><img src="img-shooters-1.jpg" alt="Leaderboard"></button>
+        </div>
+      </div>
+    </section>
+
     <!-- SHOPS -->
     <section class="sheet" id="shops">
-      <p class="res">BlackMarket / PoliceWeb</p>
-      <h2>Weapon Shops</h2>
-      <p>Two full-screen shop interfaces built around a clear loop: browse, inspect, buy. Each reads its data from the server and reacts to the player's money.</p>
+      <p class="res">BlackMarket</p>
+      <h2>Black Market</h2>
+      <p>A full-screen weapon shop built around a clear loop: browse, inspect, buy. It reads its data from the server and shows the stats of the weapon the player picks.</p>
       <ul class="chips"><li>Lua</li><li>NUI</li><li>ESX</li></ul>
       <ul class="feat">
         <li><b>Black Market</b> with weapon stats for damage, accuracy, fire rate and range</li>
-        <li><b>Police Web</b> shop showing pocket and bank money</li>
       </ul>
       <div class="gallery">
         <figure class="stage"><button type="button" aria-label="Enlarge screenshot"><img src="img-blackmarket-1.jpg" alt="Black market weapon shop with stat bars and price"></button><figcaption>Black Market</figcaption></figure>
         <div class="thumbs">
           <button type="button" data-src="img-blackmarket-1.jpg" data-cap="Black Market" data-alt="Black market weapon shop with stat bars and price" aria-current="true"><img src="img-blackmarket-1.jpg" alt="Black Market"></button>
-          <button type="button" data-src="img-police-1.jpg" data-cap="Police Web shop" data-alt="Police weapon shop with a row of weapon cards"><img src="img-police-1.jpg" alt="Police Web"></button>
         </div>
       </div>
     </section>
